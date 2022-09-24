@@ -13,12 +13,12 @@ process_quantity = int(input("Quantidade de processos: "))
 process_list = ProcessList()
 
 for index in range(process_quantity):
-    print(f'--- Inserir dados do processo {index + 1} -----')
-    arrive_time = int(input(f"Tempo de chegada do processo {index + 1}: "))
+    print(f'--- Inserir dados do processo {index + 1} (P{index + 1}) -----')
+    arrive_time = int(input(f"Tempo de chegada do processo {index + 1} (P{index + 1}): "))
     execution_time = int(
-        input(f"Tempo total de execução do processo {index + 1}: "))
+        input(f"Tempo total de execução do processo {index + 1} (P{index + 1}): "))
     context_change_time = int(
-        input(f"Tempo de troca de contexto do processo {index + 1}: "))
+        input(f"Tempo de troca de contexto do processo {index + 1} (P{index + 1}): "))
     print('-------------------------------------')
 
     process_to_push = Process(index + 1, arrive_time,
