@@ -17,7 +17,7 @@ class ProcessList:
         for process in self.value:
             if (process.ready == True):
                 ready_processes.append(process)
-        
+
         print('Fila de Prontos: ', end="")
         for index in range(len(ready_processes)):
             if (index + 1 == len(ready_processes)):
@@ -39,3 +39,17 @@ class ProcessList:
 
     def order_by_arrive_time(self):
         self.value.sort(key=lambda process: process.arrive_time, reverse=False)
+
+    def order_by_arrive_time_and_execution_time(self):
+        data_list = self.value
+        new_list = []
+
+        while data_list:
+            minimum = data_list[0]
+            for process in data_list:
+                if process.arrive_time < minimum.arrive_time or (process.arrive_time >= minimum.arrive_time and process.execution_time < minimum.execution_time):
+                    minimum = process
+            new_list.append(minimum)
+            data_list.remove(minimum)
+
+        self.value = new_list
