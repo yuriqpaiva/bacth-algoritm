@@ -1,40 +1,46 @@
 from classes.process import Process
 from classes.process_list import ProcessList
+from classes.colors import Colors
 
-print('----- Algoritmo Batch -----', end='\n')
+print(f'{Colors.OK}----- Algoritmo de escalonamento em Batch ----- {Colors.RESET}', end='\n')
 
 print('Tipo de algoritmo:')
-print('[1] FIFO')
-print('[2] SJF')
+print(f'{Colors.OK}[1]{Colors.RESET} FIFO')
+print(f'{Colors.OK}[2]{Colors.RESET} SJF')
 chosen_algoritm = int(input("Sua escolha: "))
+print(f'{Colors.OK}------------------------------------------------{Colors.RESET}')
 
 process_quantity = int(input("Quantidade de processos: "))
+
+print(f'{Colors.OK}------------------------------------------------{Colors.RESET}')
 
 process_list = ProcessList()
 
 for index in range(process_quantity):
-    print(f'--- Inserir dados do processo {index + 1} (P{index + 1}) -----')
-    arrive_time = int(input(f"Tempo de chegada do processo {index + 1} (P{index + 1}): "))
+    print(f'{Colors.OK}----- Inserir dados do processo {index + 1} (P{index + 1}) -----{Colors.RESET}')
+    arrive_time = int(
+        input(f"Tempo de chegada do processo {index + 1} (P{index + 1}): "))
     execution_time = int(
         input(f"Tempo total de execução do processo {index + 1} (P{index + 1}): "))
     context_change_time = int(
         input(f"Tempo de troca de contexto do processo {index + 1} (P{index + 1}): "))
-    print('-------------------------------------')
+    print(f'{Colors.OK}------------------------------------------------{Colors.RESET}')
 
     process_to_push = Process(index + 1, arrive_time,
                               execution_time, context_change_time)
     process_list.push(process_to_push)
 
-if (chosen_algoritm == 1):  ## FIFO
+if (chosen_algoritm == 2):  # FIFO
     process_list.order_by_arrive_time()
-else: # SJF
+else:  # SJF
     process_list.order_by_arrive_time_and_execution_time()
 
 current_time = 0
 response_avg = 0
 return_avg = 0
 print('Inicializando Execução...')
-print('-------------------------------------')
+print(f'{Colors.OK}------------------------------------------------{Colors.RESET}')
+
 process_list.show_ready_processes()
 for index in range(len(process_list.value)):
     current_process = process_list.value[index]
@@ -58,4 +64,4 @@ response_avg /= len(process_list.value)
 return_avg /= len(process_list.value)
 print(f'\nMédia Tempo de Resposta: {round(response_avg, 2)}')
 print(f'Média Tempo de Retorno: {round(return_avg, 2)}')
-print('-------------------------------------')
+print(f'{Colors.OK}------------------------------------------------{Colors.RESET}')
